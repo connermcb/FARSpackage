@@ -15,12 +15,13 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+## Package Overview
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+The `FARSfunctions` package works with data from the Fatalities Analysis Reporting System. FARS is a nationwide census of fatal injuries suffered during motor vehicle crashes. The data includes all 50 states, the District of Columbia and Puerto Rico.
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+The principle function in `FARSfunctions` is `fars_map_state`, which takes produces a simple geographic plot of the given state with all traffic fatalities for the given year plotted as points.  
+
+
 
 ## Vignette Info
 
