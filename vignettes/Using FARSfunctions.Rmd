@@ -19,7 +19,16 @@ knitr::opts_chunk$set(
 
 The `FARSfunctions` package works with data from the Fatalities Analysis Reporting System. FARS is a nationwide census of fatal injuries suffered during motor vehicle crashes. The data includes all 50 states, the District of Columbia and Puerto Rico.
 
-The principle function in `FARSfunctions` is `fars_map_state`, which takes produces a simple geographic plot of the given state with all traffic fatalities for the given year plotted as points.  
+The principle function in `FARSfunctions` is `fars_map_state`, which takes produces a simple geographic plot of the given state with all traffic fatalities for the given year plotted as points. Below is an sample plot from the call `fars_map_state(1, 2015)` where 1 is the state code for Alabama.
+
+```{r warning=FALSE, error=FALSE, echo=FALSE}
+# get functions
+source("../R/fars_functions.R")
+
+# example plot 
+fars_map_state(1, 2015)
+```
+
 
 
 
