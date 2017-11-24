@@ -21,7 +21,7 @@ The `FARSfunctions` package works with data from the Fatalities Analysis Reporti
 
 The principle function in `FARSfunctions` is `fars_map_state`, which takes produces a simple geographic plot of the given state with all traffic fatalities for the given year plotted as points. Below is an sample plot from the call `fars_map_state(1, 2015)` where 1 is the state code for Alabama.
 
-```{r warning=FALSE, error=FALSE, echo=FALSE}
+```{r warning=FALSE, error=FALSE, echo=FALSE, fig.align='center', fig.cap="Highway Fatalities - Alabama 2015"}
 # get functions
 source("../R/fars_functions.R")
 
@@ -32,44 +32,24 @@ fars_map_state(1, 2015)
 
 
 
-## Vignette Info
+## Mapping Function
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+The core function of `FARSfunctions` is `fars_map_state`. The function takes two arguments, the state number, which is an integer code assigned to states in an order roughly corresponding to the alphabetical order of the state names, and an integer, four-digit year marking the dataset to get. 
 
-## Styles
+`fars_map_state` includes several internal calls to functions for formating a file name using the given argument values, reading in the dataset for the given year, formating the data, and plotting it. 
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```{r warning=FALSE, error=FALSE, echo=TRUE, fig.align='center', fig.cap="Highway Fatalities - Texas 2015"}
+# example call to mapping function
+state <- 48 ## state number for Texas
+year <- 2015 
+fars_map_state(state.num = state, year = year)
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+A call to `fars_map_state` includes a call to a formating helper function that returns a character vector with the dataset file name to be read. The file name format is "accident_[year].csv.bz2". The substring year is supplied by the user as the year argument in the call to `fars_map_state`. As can be seen from the example, the dataset file type is bz2 zipped comma separated values file. Another helper function uses the constructed character vector to search for the file in the working directory. An exception is raised if the file is not found or is not of the correct file type.
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
 
-## More Examples
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+## More on Data Sets
 
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+More information on FARS and the datasets used with this package can be found at the [FARS Encyclopedia website]("https://www-fars.nhtsa.dot.gov/Main/index.aspx").
