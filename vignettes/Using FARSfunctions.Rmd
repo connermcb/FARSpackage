@@ -47,6 +47,14 @@ fars_map_state(state.num = state, year = year)
 
 A call to `fars_map_state` includes a call to a formating helper function that returns a character vector with the dataset file name to be read. The file name format is "accident_[year].csv.bz2". The substring year is supplied by the user as the year argument in the call to `fars_map_state`. As can be seen from the example, the dataset file type is bz2 zipped comma separated values file. Another helper function uses the constructed character vector to search for the file in the working directory. An exception is raised if the file is not found or is not of the correct file type.
 
+## Summary Stats Function
+
+The package also includes `fars_summarize_years`, a function for summarizing fatalities by state and year in tabular format. 
+
+```{r}
+# example output of summarize function
+fars_summarize_years(2015)
+```
 
 
 
