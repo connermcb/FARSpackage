@@ -32,13 +32,15 @@
 #'
 
 fars_read <- function(filename) {
-        if(!file.exists(filename))
-                stop("file '", filename, "' does not exist")
-        data <- suppressMessages({
+        if(!file.exists(filename)){
+          stop("file '", filename, "' does not exist")
+          }
+        d <- suppressMessages({
                 readr::read_csv(filename, progress = FALSE)
         })
-        dplyr::tbl_df(data)
+        return(d)
 }
+
 
 #'@title Create file name
 #'
@@ -97,8 +99,9 @@ fars_read_years <- function(years) {
                 file <- make_filename(year)
                 tryCatch({
                         dat <- fars_read(file)
-                        dplyr::mutate(dat, year = year) %>%
-                                dplyr::select(MONTH, year)
+                        dat <- dplyr::mutate(dat, year = year)
+                        dat <- dplyr::select(dat, MONTH, year)
+                        return(dat)
                 }, error = function(e) {
                         warning("invalid year: ", year)
                         return(NULL)
@@ -117,6 +120,7 @@ fars_read_years <- function(years) {
 #'
 #'@import dplyr
 #'@import tidyr
+#'@import magrittr
 #'
 #'@return
 #'Data.frame of fatalities by month for all years in \code{years}
@@ -130,10 +134,11 @@ fars_read_years <- function(years) {
 
 fars_summarize_years <- function(years) {
         dat_list <- fars_read_years(years)
-        dplyr::bind_rows(dat_list) %>%
-                dplyr::group_by(year, MONTH) %>%
-                dplyr::summarize(n = n()) %>%
-                tidyr::spread(year, n)
+        dt <- dplyr::bind_rows(dat_list)
+        grpd <- dplyr::group_by(dt, year, MONTH)
+        sum_stats <- dplyr::summarize(grpd, n = n())
+        results <- tidyr::spread(sum_stats, year, n)
+        knitr::kable(results, align = 'c', caption = "Fatalities by Month")
 }
 
 
