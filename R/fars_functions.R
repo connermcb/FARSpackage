@@ -64,15 +64,16 @@ fars_read <- function(filename) {
 #'name has .csv.bz2 file extensions.
 #'
 #'@examples
-#'make_filename(2015)
+#'\dontrun{
+#'make_filename("2015")
 #'make_filename("2016")
-#'
+#'}
 
 make_filename <- function(year) {
         year <- as.integer(year)
-        sprintf("accident_%d.csv.bz2", year)
+        f <- sprintf("accident_%d.csv.bz2", year)
+        system.file("extdata", f, package="FARSfunctions")
 }
-
 
 #'@title Read multiple data files
 #'
@@ -173,8 +174,9 @@ fars_summarize_years <- function(years) {
 #'NULL value
 #'
 #'@examples
+#'\dontrun{
 #'fars_map_state(1, 2013)
-#'
+#'}
 #'@export
 #'
 
