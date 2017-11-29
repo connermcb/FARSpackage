@@ -127,9 +127,10 @@ fars_read_years <- function(years) {
 #'Data.frame of fatalities by month for all years in \code{years}
 #'
 #'@examples
+#'\dontrun{
 #'fars_summarize_years(2013)
 #'fars_summarize_years(c(2013, 2014, 2015))
-#'
+#'}
 #'@export
 #'
 
