@@ -10,3 +10,7 @@ Description: Takes raw data from Fatalities Analysis Reporting System, cleans
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1
