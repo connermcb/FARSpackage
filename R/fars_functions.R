@@ -100,7 +100,9 @@ fars_read_years <- function(years) {
                 file <- make_filename(year)
                 tryCatch({
                         dt <- fars_read(file)
-                        dt <- dplyr::mutate(dt, year = year)
+                        dt <- dplyr::mutate(dt, year = as.integer(
+                          as.character(year))
+                          )
                         dt <- with(dt, dplyr::select(dt, MONTH, year))
                         return(dt)
                 }, error = function(e) {
@@ -137,7 +139,8 @@ fars_read_years <- function(years) {
 fars_summarize_years <- function(years) {
         dat_list <- fars_read_years(years)
         dt <- dplyr::bind_rows(dat_list)
-        grpd <- with(dt, dplyr::group_by(year, MONTH))
+        print(dt)
+        grpd <- with(dt, dplyr::group_by(dt, year, MONTH))
         sum_stats <- dplyr::summarize(grpd, n = n())
         results <- tidyr::spread(sum_stats, year, n)
         knitr::kable(results, align = 'c', caption = "Fatalities by Month")
