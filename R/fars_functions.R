@@ -101,7 +101,7 @@ fars_read_years <- function(years) {
                 tryCatch({
                         dat <- fars_read(file)
                         dat <- dplyr::mutate(dat, year = year)
-                        dat <- dplyr::select_(dat, MONTH, year)
+                        dat <- dplyr::select_(dat, "MONTH", year)
                         return(dat)
                 }, error = function(e) {
                         warning("invalid year: ", year)
@@ -137,7 +137,7 @@ fars_read_years <- function(years) {
 fars_summarize_years <- function(years) {
         dat_list <- fars_read_years(years)
         dt <- dplyr::bind_rows(dat_list)
-        grpd <- dplyr::group_by_(dt, year, MONTH)
+        grpd <- dplyr::group_by_(dt, year, "MONTH")
         sum_stats <- dplyr::summarize(grpd, n = n())
         results <- tidyr::spread(sum_stats, year, n)
         knitr::kable(results, align = 'c', caption = "Fatalities by Month")
@@ -188,7 +188,7 @@ fars_map_state <- function(state.num, year) {
 
         if(!(state.num %in% unique(data$STATE)))
                 stop("invalid STATE number: ", state.num)
-        data.sub <- dplyr::filter_(data, STATE == state.num)
+        data.sub <- dplyr::filter_(data, "STATE" == state.num)
         if(nrow(data.sub) == 0L) {
                 message("no accidents to plot")
                 return(invisible(NULL))
