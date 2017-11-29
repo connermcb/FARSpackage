@@ -142,7 +142,7 @@ fars_summarize_years <- function(years) {
         print(dt)
         grpd <- with(dt, dplyr::group_by(dt, year, MONTH))
         sum_stats <- dplyr::summarize(grpd, n = n())
-        results <- tidyr::spread(sum_stats, year, n)
+        results <- with(sum_stats, tidyr::spread(sum_stats, year, n))
         knitr::kable(results, align = 'c', caption = "Fatalities by Month")
 }
 
