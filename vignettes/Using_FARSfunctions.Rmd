@@ -1,0 +1,63 @@
+---
+title: "Using FARSfunctions"
+author: Conner McBride
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+## Package Overview
+
+The `FARSfunctions` package works with data from the Fatalities Analysis Reporting System. FARS is a nationwide census of fatal injuries suffered during motor vehicle crashes. The data includes all 50 states, the District of Columbia and Puerto Rico.
+
+The principle function in `FARSfunctions` is `fars_map_state`, which takes produces a simple geographic plot of the given state with all traffic fatalities for the given year plotted as points. Below is an sample plot from the call `fars_map_state(1, 2015)` where 1 is the state code for Alabama.
+
+```{r warning=FALSE, error=FALSE, echo=FALSE, fig.align='center', fig.cap="Highway Fatalities - Alabama 2015"}
+# get functions
+source("../R/fars_functions.R")
+
+# example plot 
+fars_map_state(1, 2015)
+```
+
+
+
+
+## Mapping Function
+
+The core function of `FARSfunctions` is `fars_map_state`. The function takes two arguments, the state number, which is an integer code assigned to states in an order roughly corresponding to the alphabetical order of the state names, and an integer, four-digit year marking the dataset to get. 
+
+`fars_map_state` includes several internal calls to functions for formating a file name using the given argument values, reading in the dataset for the given year, formating the data, and plotting it. 
+
+```{r warning=FALSE, error=FALSE, echo=TRUE, fig.align='center', fig.cap="Highway Fatalities - Texas 2015"}
+# example call to mapping function
+state <- 48 ## state number for Texas
+year <- 2015 
+fars_map_state(state.num = state, year = year)
+```
+
+A call to `fars_map_state` includes a call to a formating helper function that returns a character vector with the dataset file name to be read. The file name format is "accident_[year].csv.bz2". The substring year is supplied by the user as the year argument in the call to `fars_map_state`. As can be seen from the example, the dataset file type is bz2 zipped comma separated values file. Another helper function uses the constructed character vector to search for the file in the working directory. An exception is raised if the file is not found or is not of the correct file type.
+
+## Summary Stats Function
+
+The package also includes `fars_summarize_years`, a function for summarizing fatalities by state and year in tabular format. 
+
+```{r}
+# example output of summarize function
+fars_summarize_years(2015)
+```
+
+
+
+## More on Data Sets
+
+More information on FARS and the datasets used with this package can be found at the [FARS Encyclopedia website]("https://www-fars.nhtsa.dot.gov/Main/index.aspx").
