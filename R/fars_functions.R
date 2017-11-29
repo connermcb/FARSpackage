@@ -99,10 +99,10 @@ fars_read_years <- function(years) {
         lapply(years, function(year) {
                 file <- make_filename(year)
                 tryCatch({
-                        dat <- fars_read(file)
-                        dat <- dplyr::mutate(dat, year = year)
-                        dat <- dplyr::select_(dat, "MONTH", year)
-                        return(dat)
+                        dt <- fars_read(file)
+                        dt <- dplyr::mutate(dt, year = year)
+                        dt <- with(dt, dplyr::select(dt, MONTH, year))
+                        return(dt)
                 }, error = function(e) {
                         warning("invalid year: ", year)
                         return(NULL)
@@ -137,7 +137,7 @@ fars_read_years <- function(years) {
 fars_summarize_years <- function(years) {
         dat_list <- fars_read_years(years)
         dt <- dplyr::bind_rows(dat_list)
-        grpd <- dplyr::group_by_(dt, year, "MONTH")
+        grpd <- with(dt, dplyr::group_by(year, MONTH))
         sum_stats <- dplyr::summarize(grpd, n = n())
         results <- tidyr::spread(sum_stats, year, n)
         knitr::kable(results, align = 'c', caption = "Fatalities by Month")
@@ -183,19 +183,19 @@ fars_summarize_years <- function(years) {
 
 fars_map_state <- function(state.num, year) {
         filename <- make_filename(year)
-        data <- fars_read(filename)
+        dt <- fars_read(filename)
         state.num <- as.integer(state.num)
 
-        if(!(state.num %in% unique(data$STATE)))
+        if(!(state.num %in% unique(dt$STATE)))
                 stop("invalid STATE number: ", state.num)
-        data.sub <- dplyr::filter_(data, "STATE" == state.num)
-        if(nrow(data.sub) == 0L) {
+        dt.sub <- with(dt, dplyr::filter(dt, STATE == state.num))
+        if(nrow(dt.sub) == 0L) {
                 message("no accidents to plot")
                 return(invisible(NULL))
         }
-        is.na(data.sub$LONGITUD) <- data.sub$LONGITUD > 900
-        is.na(data.sub$LATITUDE) <- data.sub$LATITUDE > 90
-        with(data.sub, {
+        is.na(dt.sub$LONGITUD) <- dt.sub$LONGITUD > 900
+        is.na(dt.sub$LATITUDE) <- dt.sub$LATITUDE > 90
+        with(dt.sub, {
                 maps::map("state", ylim = range(LATITUDE, na.rm = TRUE),
                           xlim = range(LONGITUD, na.rm = TRUE))
                 graphics::points(LONGITUD, LATITUDE, pch = 46)
