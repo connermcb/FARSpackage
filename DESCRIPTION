@@ -11,7 +11,6 @@ License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 Imports: readr, dplyr, tidyr, magrittr, maps, graphics
-Suggests: knitr, 
-    rmarkdown
+Suggests: knitr, readr, dplyr, tidyr, magrittr, maps, graphics, rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

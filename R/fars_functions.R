@@ -95,6 +95,7 @@ make_filename <- function(year) {
 #'@return
 #'data.frame
 #'
+#'@export
 
 fars_read_years <- function(years) {
         lapply(years, function(year) {
