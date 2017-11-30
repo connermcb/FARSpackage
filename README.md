@@ -2,7 +2,7 @@
 
 ## About
 
-The \code{FARSpackage} is a simple toy example implemented for the purpose of learning to build an R package using RStudio and the \code{devtools} package. 
+The `FARSpackage` is a simple toy example implemented for the purpose of learning to build an R package using RStudio and the `devtools` package. 
 
 The package is built around a single .R file with a suite of functions for summarizing and geographically plotting data from the Fatality Analysis Reporting System, a database of highway fatalities in the 50 United States and her territories. 
 
@@ -14,9 +14,9 @@ The data used by the functions in this package and included as an internal data 
 
 ## Functions
 
-The two exported functions that are available to users and constitute the workhorses of the package are \code{fars_map_state} and \code{fars_summarize_years}. The first produces a simple two-layer plot of the outline of the state and scatter plot of the coordinate points corresponding to each traffic accident included in the dataset.
+The two exported functions that are available to users and constitute the workhorses of the package are `fars_map_state` and `fars_summarize_years`. The first produces a simple two-layer plot of the outline of the state and scatter plot of the coordinate points corresponding to each traffic accident included in the dataset.
 
-The exported functions rely on additional unexported helper functions responsible for loading, tidying and formatting the data before feeding it to \code{fars_map_state} or \code{fars_summarize_years}.
+The exported functions rely on additional unexported helper functions responsible for loading, tidying and formatting the data before feeding it to `fars_map_state` or `fars_summarize_years`.
 
 ## travis-ci Badge
-https://travis-ci.org/connermcb/FARSpackage.svg?branch=master
+[![Build Status](https://travis-ci.org/connermcb/FARSpackage.svg?branch=master)](https://travis-ci.org/connermcb/FARSpackage)
