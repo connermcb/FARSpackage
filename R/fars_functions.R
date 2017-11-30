@@ -24,7 +24,12 @@
 #' class object. If file name not found, function stopped and "file does not exist"
 #' warning returned.
 #'
-
+#' @examples
+#' \dontrun{
+#' df <- fars_read("data_file.csv")
+#' df <- fars_read("data_file.csv.bz2")
+#'}
+#'
 
 fars_read <- function(filename) {
         if(!file.exists(filename)){
@@ -58,7 +63,11 @@ fars_read <- function(filename) {
 #'@return Returns a string in FARS format with \code{year} embedded. The file
 #'name has .csv.bz2 file extensions.
 #'
-
+#'@examples
+#'\dontrun{
+#'make_filename("2015")
+#'make_filename("2016")
+#'}
 
 make_filename <- function(year) {
         year <- as.integer(year)
@@ -119,7 +128,10 @@ fars_read_years <- function(years) {
 #'@return
 #'Data.frame of fatalities by month for all years in \code{years}
 #'
-
+#'@examples
+#'\dontrun{
+#'fars_summarize_years(2015)
+#'}
 #'@export
 #'
 
@@ -163,7 +175,10 @@ fars_summarize_years <- function(years) {
 #'@return
 #'NULL value
 #'
-
+#'@examples
+#'\dontrun{
+#'fars_map_state(1, 2015)
+#'}
 #'@export
 #'
 
