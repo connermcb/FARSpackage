@@ -1,5 +1,8 @@
 export("fars_summarize_years")
 export("fars_map_state")
+export("make_filename")
+export("fars_read_years")
+export("accident_2015")
 
 importFrom("readr", "read_csv")
 importFrom("dplyr", "tbl_df", "mutate", "select", "group_by", "summarize", "bind_rows")
