@@ -138,9 +138,8 @@ fars_read_years <- function(years) {
 fars_summarize_years <- function(years) {
         dat_list <- fars_read_years(years)
         dt <- dplyr::bind_rows(dat_list)
-        print(dt)
         grpd <- with(dt, dplyr::group_by(dt, year, MONTH))
-        sum_stats <- dplyr::summarize(grpd, n = n())
+        sum_stats <- with(grpd, dplyr::summarize(grpd, n = n()))
         results <- with(sum_stats, tidyr::spread(sum_stats, year, n))
         knitr::kable(results, align = 'c', caption = "Fatalities by Month")
 }
