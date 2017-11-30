@@ -18,7 +18,7 @@ before summarizing fatality counts in a table with columns as years and rows
 as months represented by integers using \code{link{fars_read_years}}
 }
 \examples{
-fars_summarize_years(2013)
-fars_summarize_years(c(2013, 2014, 2015))
-
+\dontrun{
+fars_summarize_years(2015)
+}
 }
