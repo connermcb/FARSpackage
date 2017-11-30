@@ -72,6 +72,7 @@ fars_read <- function(filename) {
 make_filename <- function(year) {
         year <- as.integer(year)
         f <- sprintf("accident_%d.csv.bz2", year)
+        print(paste("Loading file:", f))
         system.file("extdata", f, package="FARSfunctions")
 }
 
@@ -129,10 +130,9 @@ fars_read_years <- function(years) {
 #'Data.frame of fatalities by month for all years in \code{years}
 #'
 #'@examples
-#'\dontrun{
 #'fars_summarize_years(2015)
-#'}
-#'@export
+#'
+#'
 #'
 
 fars_summarize_years <- function(years) {
@@ -176,10 +176,8 @@ fars_summarize_years <- function(years) {
 #'NULL value
 #'
 #'@examples
-#'\dontrun{
 #'fars_map_state(1, 2015)
-#'}
-#'@export
+#'
 #'
 
 fars_map_state <- function(state.num, year) {
