@@ -32,7 +32,7 @@ If the given value for state.num is not a state in the dataset, a "invalid STATE
 error is raised.
 }
 \examples{
-\dontrun{
 fars_map_state(1, 2015)
-}
+
+
 }

@@ -23,10 +23,9 @@ Helper function used with other functions in this package, specifically
 \code{\link{fars_read_years}}, \code{\link{fars_map_state}}.
 }
 \examples{
-\dontrun{
 make_filename("2015")
 make_filename("2016")
-}
+
 }
 \seealso{
 \code{fars_read} is called as a helper function in

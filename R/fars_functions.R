@@ -64,10 +64,9 @@ fars_read <- function(filename) {
 #'name has .csv.bz2 file extensions.
 #'
 #'@examples
-#'\dontrun{
 #'make_filename("2015")
 #'make_filename("2016")
-#'}
+#'
 
 make_filename <- function(year) {
         year <- as.integer(year)
