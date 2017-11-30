@@ -20,6 +20,4 @@ as months represented by integers using \code{link{fars_read_years}}
 \examples{
 fars_summarize_years(2015)
 
-
-
 }

@@ -67,6 +67,7 @@ fars_read <- function(filename) {
 #'make_filename("2015")
 #'make_filename("2016")
 #'
+#'@export
 
 make_filename <- function(year) {
         year <- as.integer(year)
@@ -131,7 +132,7 @@ fars_read_years <- function(years) {
 #'@examples
 #'fars_summarize_years(2015)
 #'
-#'
+#'@export
 #'
 
 fars_summarize_years <- function(years) {
@@ -177,7 +178,7 @@ fars_summarize_years <- function(years) {
 #'@examples
 #'fars_map_state(1, 2015)
 #'
-#'
+#'@export
 
 fars_map_state <- function(state.num, year) {
         filename <- make_filename(year)

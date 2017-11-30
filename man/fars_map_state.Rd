@@ -34,5 +34,4 @@ error is raised.
 \examples{
 fars_map_state(1, 2015)
 
-
 }
